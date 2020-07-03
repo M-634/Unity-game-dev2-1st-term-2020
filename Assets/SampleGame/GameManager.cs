@@ -1,15 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject m_playerPrefab;
     SaveData m_saveData;
-    string m_key = "Config";
+    string m_path;
 
     void Start()
     {
+        m_path = Application.dataPath + ".text";
         m_saveData = new SaveData();
         StartGame();
     }
@@ -44,14 +46,25 @@ public class GameManager : MonoBehaviour
 
         string json = JsonUtility.ToJson(m_saveData, true);
         Debug.Log("シリアライズされた JSON データ: " + json);
-        PlayerPrefs.SetString(m_key, json);
+        //PlayerPrefs.SetString(m_key, json);
+
+        StreamWriter writer = new StreamWriter(m_path);
+        writer.Write(json);
+        writer.Flush();
+        writer.Close();
     }
 
     public void LoadGame()
     {
         // ここにコードを追加する
-        string json = PlayerPrefs.GetString(m_key);
+        //string json = PlayerPrefs.GetString(m_key);
+        string json = "";
+        StreamReader reader = new StreamReader(m_path);
+        json = reader.ReadToEnd();
+        reader.Close();
         m_saveData = JsonUtility.FromJson<SaveData>(json);
+
+        Debug.Log(json);
 
         //playerの座標を更新する
         SpawnPlayer(m_saveData.posX, m_saveData.posY);
