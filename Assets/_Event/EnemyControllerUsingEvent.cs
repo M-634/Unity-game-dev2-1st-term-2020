@@ -35,7 +35,7 @@ public class EnemyControllerUsingEvent : MonoBehaviour, IEnemyMessageHandler
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "BulletTag")
+        if (collision.gameObject.CompareTag("BulletTag"))
         {
             Die();
         }

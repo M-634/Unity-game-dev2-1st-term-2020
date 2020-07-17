@@ -12,6 +12,7 @@ public class EnemyCounterUsingEvent : MonoBehaviour, IEnemyCounterMessageHandler
         EventManager.Instance.Unsubscribe(this.gameObject);
     }
 
+
     void OnEnable()
     {
         EventManager.Instance.Subscribe(this.gameObject);
