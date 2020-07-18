@@ -30,10 +30,10 @@ public class EnemyControllerUsingEvent : MonoBehaviour, IEnemyMessageHandler
     public void Die()
     {
         m_isDead = true;
-        EventManager.Instance.RaiseEvent<EnemyCounterUsingEvent>(null, (x, y) => x.OnEnemyDeath());
-        //var eventManager = EventManager.Instance;
-        //eventManager.RaiseEvent<EnemyCounterUsingEvent>(null, (x, y) => x.OnEnemyDeath());
-        //eventManager.RaiseEvent<ScoreManaegerUsingEvent>(null, (x, y) => x.GetSocre(m_score));
+        //EventManager.Instance.RaiseEvent<EnemyCounterUsingEvent>(null, (x, y) => x.OnEnemyDeath());
+        var eventManager = EventManager.Instance;
+        eventManager.RaiseEvent<EnemyCounterUsingEvent>(null, (x, y) => x.OnEnemyDeath());
+        eventManager.RaiseEvent<ScoreManaegerUsingEvent>(null, (x, y) => x.GetSocre(m_score));
 
         Instantiate(m_explosionEffect, this.transform.position, Quaternion.identity);
         Destroy(this.gameObject); 
