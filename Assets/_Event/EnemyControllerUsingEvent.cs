@@ -8,6 +8,8 @@ public class EnemyControllerUsingEvent : MonoBehaviour, IEnemyMessageHandler
 {
     /// <summary>消える時に出すエフェクト</summary>
     [SerializeField] GameObject m_explosionEffect;
+    /// <summary>敵のスコア </summary>
+    [SerializeField] int m_score = 100;
     private bool m_isDead;
 
     public bool IsDead
@@ -29,8 +31,12 @@ public class EnemyControllerUsingEvent : MonoBehaviour, IEnemyMessageHandler
     {
         m_isDead = true;
         EventManager.Instance.RaiseEvent<EnemyCounterUsingEvent>(null, (x, y) => x.OnEnemyDeath());
+        //var eventManager = EventManager.Instance;
+        //eventManager.RaiseEvent<EnemyCounterUsingEvent>(null, (x, y) => x.OnEnemyDeath());
+        //eventManager.RaiseEvent<ScoreManaegerUsingEvent>(null, (x, y) => x.GetSocre(m_score));
+
         Instantiate(m_explosionEffect, this.transform.position, Quaternion.identity);
-        Destroy(this.gameObject);
+        Destroy(this.gameObject); 
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

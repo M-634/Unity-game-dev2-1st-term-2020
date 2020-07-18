@@ -2,7 +2,7 @@
 
 public interface IScoreHandler : IEventSystemHandler
 {
-    void GetSocre();
+    void GetSocre(int score);
 }
 
 
