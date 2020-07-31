@@ -7,16 +7,16 @@ public class EnemyCounterUsingEvent : MonoBehaviour, IEnemyCounterMessageHandler
 {
     bool m_isAllEnemiesCleared;
 
-    private void OnDisable()
-    {
-        EventManager.Instance.Unsubscribe(this.gameObject);
-    }
+    //private void OnDisable()
+    //{
+    //    EventManager.Instance.Unsubscribe(this.gameObject);
+    //}
 
 
-    void OnEnable()
-    {
-        EventManager.Instance.Subscribe(this.gameObject);
-    }
+    //void OnEnable()
+    //{
+    //    EventManager.Instance.Subscribe(this.gameObject);
+    //}
 
     public void OnEnemyDeath()
     {
