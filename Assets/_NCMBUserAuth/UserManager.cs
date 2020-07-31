@@ -238,4 +238,15 @@ public class UserManager : MonoBehaviour
             }
         });
     }
+
+    /// <summary>
+    /// 退会処理
+    /// </summary>
+    public void Cancel()
+    {
+        NCMBUser.CurrentUser.DeleteAsync((NCMBException e) => 
+        {
+            Debug.Log("退会処理完了");
+        });
+    }
 }
